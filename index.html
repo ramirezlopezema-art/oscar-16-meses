@@ -40,7 +40,7 @@
       position: relative;
       display: grid;
       min-height: 100svh;
-      place-items: center;
+      place-items: start center;
       padding: 48px 20px;
       isolation: isolate;
     }
@@ -198,7 +198,7 @@
 
     .photo-grid {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 9px;
     }
 
@@ -304,6 +304,10 @@
       .photo-grid { gap: 7px; }
     }
 
+    @media (min-width: 700px) {
+      .photo-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         scroll-behavior: auto !important;
@@ -325,26 +329,26 @@
       <p class="eyebrow">Una historia que sigue creciendo</p>
       <div class="heart-mark" aria-hidden="true">♥</div>
       <h1 id="title">16 meses<span>contigo</span></h1>
+      <section class="memories" aria-labelledby="memories-title">
+        <h2 class="memories-title" id="memories-title">Nuestros momentos</h2>
+        <div class="photo-grid">
+          <figure><img src="assets/recuerdo-01.jpeg" alt="Un retrato al aire libre entre las montañas" decoding="async"></figure>
+          <figure><img src="assets/recuerdo-02.jpeg" alt="Un momento especial con un ramo de rosas" decoding="async"></figure>
+          <figure><img src="assets/recuerdo-03.jpeg" alt="Un retrato sonriente" decoding="async"></figure>
+          <figure><img src="assets/recuerdo-04.jpeg" alt="Un recuerdo juntos" decoding="async"></figure>
+          <figure><img src="assets/recuerdo-05.jpeg" alt="Un paseo juntos" decoding="async"></figure>
+          <figure><img src="assets/recuerdo-06.jpeg" alt="Un selfie juntos en un lugar colorido" decoding="async"></figure>
+          <figure><img src="assets/recuerdo-07.jpeg" alt="Una mirada cómplice" decoding="async"></figure>
+          <figure><img src="assets/recuerdo-08.jpeg" alt="Un momento cariñoso juntos" decoding="async"></figure>
+        </div>
+      </section>
+
       <p class="intro">Para Oscar, con todo mi amor.<br>Hay algo que quiero decirte desde el corazón.</p>
       <button class="open-button" type="button" aria-expanded="false" aria-controls="letter">
         <span class="button-label">Abrir mi carta</span>
         <span class="button-heart" aria-hidden="true">♥</span>
       </button>
       <p class="hint">Un pequeño recuerdo de nosotros</p>
-
-      <section class="memories" aria-labelledby="memories-title">
-        <h2 class="memories-title" id="memories-title">Nuestros momentos</h2>
-        <div class="photo-grid">
-          <figure><img src="assets/recuerdo-01.jpeg" alt="Un retrato al aire libre entre las montañas" loading="lazy" decoding="async"></figure>
-          <figure><img src="assets/recuerdo-02.jpeg" alt="Un momento especial con un ramo de rosas" loading="lazy" decoding="async"></figure>
-          <figure><img src="assets/recuerdo-03.jpeg" alt="Un retrato sonriente" loading="lazy" decoding="async"></figure>
-          <figure><img src="assets/recuerdo-04.jpeg" alt="Un recuerdo juntos" loading="lazy" decoding="async"></figure>
-          <figure><img src="assets/recuerdo-05.jpeg" alt="Un paseo juntos" loading="lazy" decoding="async"></figure>
-          <figure><img src="assets/recuerdo-06.jpeg" alt="Un selfie juntos en un lugar colorido" loading="lazy" decoding="async"></figure>
-          <figure><img src="assets/recuerdo-07.jpeg" alt="Una mirada cómplice" loading="lazy" decoding="async"></figure>
-          <figure><img src="assets/recuerdo-08.jpeg" alt="Un momento cariñoso juntos" loading="lazy" decoding="async"></figure>
-        </div>
-      </section>
 
       <article class="letter" id="letter" hidden>
         <p>Hoy no es un día cualquiera. Hoy cumplimos 16 meses de caminar juntos, y aunque para algunos pueda sonar como un simple número, para mí es la prueba viva de que lo nuestro es real, es fuerte y es para siempre.</p>
