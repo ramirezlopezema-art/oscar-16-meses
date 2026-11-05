@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f8f2ed">
+  <meta name="description" content="Una carta para celebrar 16 meses juntos.">
+  <title>16 meses contigo — una carta para Oscar</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #422b31;
+      --muted: #8d7276;
+      --rose: #b65f70;
+      --rose-dark: #8d4054;
+      --line: #ead9d2;
+      --serif: Georgia, "Times New Roman", serif;
+      --sans: "Segoe UI", Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { min-width: 320px; scroll-behavior: smooth; }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      overflow-x: hidden;
+      color: var(--ink);
+      background:
+        radial-gradient(ellipse at 10% 12%, rgba(234, 188, 180, .27), transparent 34rem),
+        radial-gradient(ellipse at 93% 78%, rgba(221, 175, 177, .2), transparent 32rem),
+        #f8f2ed;
+      font-family: var(--sans);
+    }
+
+    button { font: inherit; }
+
+    .scene {
+      position: relative;
+      display: grid;
+      min-height: 100svh;
+      place-items: center;
+      padding: 48px 20px;
+      isolation: isolate;
+    }
+
+    .glow {
+      position: fixed;
+      z-index: -1;
+      width: 25rem;
+      aspect-ratio: 1;
+      border: 1px solid rgba(182, 95, 112, .12);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .glow::before,
+    .glow::after {
+      position: absolute;
+      inset: 14%;
+      border: 1px solid rgba(182, 95, 112, .1);
+      border-radius: inherit;
+      content: "";
+    }
+
+    .glow::after { inset: 29%; }
+    .glow-one { top: -15rem; left: -12rem; }
+    .glow-two { right: -14rem; bottom: -16rem; width: 34rem; }
+
+    .sparkles {
+      position: fixed;
+      z-index: -1;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .sparkle {
+      position: absolute;
+      bottom: -2rem;
+      color: rgba(182, 95, 112, .42);
+      animation: float-up var(--duration) linear infinite;
+      animation-delay: var(--delay);
+      font-size: var(--size);
+      opacity: 0;
+    }
+
+    .card {
+      width: min(100%, 760px);
+      padding: clamp(32px, 7vw, 72px) clamp(24px, 8vw, 84px);
+      border: 1px solid rgba(255, 255, 255, .9);
+      border-radius: 4px;
+      background: rgba(255, 250, 245, .91);
+      box-shadow: 0 24px 80px rgba(100, 54, 60, .12), 0 2px 9px rgba(100, 54, 60, .06);
+      text-align: center;
+      animation: arrive 900ms cubic-bezier(.2, .75, .25, 1) both;
+      backdrop-filter: blur(8px);
+    }
+
+    .eyebrow {
+      margin: 0 0 24px;
+      color: var(--rose-dark);
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+    }
+
+    .heart-mark {
+      display: grid;
+      width: 54px;
+      height: 54px;
+      margin: 0 auto 20px;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      color: var(--rose);
+      font-size: 1.25rem;
+      animation: heartbeat 2.2s ease-in-out infinite;
+    }
+
+    h1 {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: clamp(2.6rem, 8vw, 5rem);
+      font-weight: 400;
+      letter-spacing: -.055em;
+      line-height: .98;
+    }
+
+    h1 span {
+      display: block;
+      margin-top: 12px;
+      color: var(--rose-dark);
+      font-size: .66em;
+      font-style: italic;
+      letter-spacing: -.035em;
+    }
+
+    .intro {
+      max-width: 420px;
+      margin: 25px auto 30px;
+      color: var(--muted);
+      font-family: var(--serif);
+      font-size: clamp(1.05rem, 2.8vw, 1.22rem);
+      line-height: 1.7;
+    }
+
+    .open-button {
+      display: inline-flex;
+      min-height: 52px;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 0 27px;
+      border: 0;
+      border-radius: 999px;
+      color: white;
+      background: var(--rose-dark);
+      box-shadow: 0 8px 20px rgba(141, 64, 84, .2);
+      cursor: pointer;
+      transition: transform 180ms ease, background 180ms ease, box-shadow 180ms ease;
+    }
+
+    .open-button:hover {
+      transform: translateY(-2px);
+      background: #763449;
+      box-shadow: 0 11px 24px rgba(141, 64, 84, .25);
+    }
+
+    .open-button:focus-visible {
+      outline: 3px solid #d59ba4;
+      outline-offset: 4px;
+    }
+
+    .button-heart { font-size: 1rem; }
+
+    .hint {
+      margin: 14px 0 0;
+      color: #a48d8c;
+      font-size: .72rem;
+      letter-spacing: .04em;
+    }
+
+    .letter {
+      max-width: 580px;
+      margin: 34px auto 0;
+      padding-top: 28px;
+      border-top: 1px solid var(--line);
+      text-align: left;
+      animation: unfold 650ms cubic-bezier(.2, .7, .2, 1) both;
+    }
+
+    .letter[hidden] { display: none; }
+
+    .letter p {
+      margin: 0 0 1.15em;
+      color: #60474b;
+      font-family: var(--serif);
+      font-size: clamp(1.02rem, 2.5vw, 1.12rem);
+      line-height: 1.9;
+    }
+
+    .letter .signoff {
+      margin: 1.8em 0 0;
+      color: var(--rose-dark);
+      font-style: italic;
+    }
+
+    .letter .signature {
+      margin: .25em 0 0;
+      color: var(--rose-dark);
+      font-size: 1.3rem;
+      font-style: italic;
+    }
+
+    .closing {
+      margin: 30px 0 0;
+      color: var(--rose);
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-style: italic;
+    }
+
+    .footer {
+      margin: 30px 0 0;
+      color: #aa9491;
+      font-size: .66rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    @keyframes arrive {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes unfold {
+      from { opacity: 0; clip-path: inset(0 0 100%); transform: translateY(-8px); }
+      to { opacity: 1; clip-path: inset(0 0 0); transform: translateY(0); }
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      8% { transform: scale(1.1); }
+      16% { transform: scale(1); }
+      24% { transform: scale(1.07); }
+      34% { transform: scale(1); }
+    }
+
+    @keyframes float-up {
+      0% { opacity: 0; transform: translate3d(0, 0, 0) rotate(-12deg); }
+      12% { opacity: .7; }
+      85% { opacity: .5; }
+      100% { opacity: 0; transform: translate3d(var(--drift), -110vh, 0) rotate(25deg); }
+    }
+
+    @media (max-width: 520px) {
+      .scene { padding: 24px 14px; }
+      .card { padding: 38px 23px; }
+      .eyebrow { margin-bottom: 20px; font-size: .6rem; }
+      .letter { margin-top: 28px; padding-top: 22px; }
+      .letter p { line-height: 1.8; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+      .sparkles { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="scene">
+    <div class="glow glow-one" aria-hidden="true"></div>
+    <div class="glow glow-two" aria-hidden="true"></div>
+    <div class="sparkles" aria-hidden="true"></div>
+
+    <section class="card" aria-labelledby="title">
+      <p class="eyebrow">Una historia que sigue creciendo</p>
+      <div class="heart-mark" aria-hidden="true">♥</div>
+      <h1 id="title">16 meses<span>contigo</span></h1>
+      <p class="intro">Para Oscar, con todo mi amor.<br>Hay algo que quiero decirte desde el corazón.</p>
+      <button class="open-button" type="button" aria-expanded="false" aria-controls="letter">
+        <span class="button-label">Abrir mi carta</span>
+        <span class="button-heart" aria-hidden="true">♥</span>
+      </button>
+      <p class="hint">Un pequeño recuerdo de nosotros</p>
+
+      <article class="letter" id="letter" hidden>
+        <p>Hoy no es un día cualquiera. Hoy cumplimos 16 meses de caminar juntos, y aunque para algunos pueda sonar como un simple número, para mí es la prueba viva de que lo nuestro es real, es fuerte y es para siempre.</p>
+        <p>16 meses. Parece que fue ayer cuando todo empezó, y a la vez siento que te he amado toda la vida. Recuerdo los primeros días, esas mariposas en el estómago, las ganas de escribirte apenas despertaba, de contarte todo lo que me pasaba aunque no fuera nada importante. Y me doy cuenta de que, 16 meses después, sigo sintiendo exactamente lo mismo. Quizás hasta más.</p>
+        <p>Contigo he aprendido lo que es el amor de verdad. No el de las películas, sino el de todos los días: el que se construye con paciencia, con comprensión, con esos pequeños gestos que nadie más ve. El amor de reírnos juntos hasta que duela la panza, de apoyarnos en los días grises, de entendernos con una sola mirada. Ese amor que no se nota en las grandes cosas, sino en las pequeñas: en un mensaje de buenos días, en un abrazo que llega justo cuando más lo necesito, en saber que siempre estás ahí.</p>
+        <p>Gracias por cada momento que me has regalado. Gracias por tu paciencia cuando no soy perfecto, por tu sonrisa que ilumina mi día, por creer en mí incluso cuando yo dudo. Gracias por ser mi lugar seguro, mi paz, mi persona favorita en todo el mundo.</p>
+        <p>16 meses no son muchos en la vida de una persona, pero son suficientes para saber que quiero pasar muchos más a tu lado. Quiero seguir celebrando cada mes, cada año, cada etapa. Quiero seguir construyendo esta historia nuestra, que cada día me parece más hermosa.</p>
+        <p>No sé qué nos depara el futuro, pero de una cosa estoy seguro: quiero que estés en él. Quiero seguir eligiéndote todos los días, como lo he hecho desde el primer momento.</p>
+        <p>Te amo hoy, mañana y siempre. Felices 16 meses, mi amor. Esto es solo el comienzo de una historia que quiero escribir contigo para siempre.</p>
+        <p class="signoff">Con todo mi corazón,</p>
+        <p class="signature">Quien te ama sin medida</p>
+      </article>
+
+      <p class="closing" aria-hidden="true">Hoy, mañana y siempre ♥</p>
+      <p class="footer">16 meses · y todo lo que viene</p>
+    </section>
+  </main>
+  <script>
+    const button = document.querySelector(".open-button");
+    const letter = document.querySelector("#letter");
+    const label = document.querySelector(".button-label");
+
+    button.addEventListener("click", () => {
+      const isOpening = letter.hidden;
+      letter.hidden = !isOpening;
+      button.setAttribute("aria-expanded", String(isOpening));
+      label.textContent = isOpening ? "Cerrar mi carta" : "Abrir mi carta";
+      if (isOpening) letter.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    });
+
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      const sparkleField = document.querySelector(".sparkles");
+      for (let i = 0; i < 13; i += 1) {
+        const sparkle = document.createElement("span");
+        sparkle.className = "sparkle";
+        sparkle.textContent = i % 3 === 0 ? "✦" : "♥";
+        sparkle.style.left = `${5 + Math.random() * 90}%`;
+        sparkle.style.setProperty("--size", `${9 + Math.random() * 13}px`);
+        sparkle.style.setProperty("--duration", `${12 + Math.random() * 13}s`);
+        sparkle.style.setProperty("--delay", `${-Math.random() * 24}s`);
+        sparkle.style.setProperty("--drift", `${Math.round(Math.random() * 100 - 50)}px`);
+        sparkleField.append(sparkle);
+      }
+    }
+  </script>
+</body>
+</html>
