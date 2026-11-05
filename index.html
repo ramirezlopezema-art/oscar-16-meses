@@ -183,6 +183,44 @@
       letter-spacing: .04em;
     }
 
+    .memories {
+      max-width: 560px;
+      margin: 34px auto 0;
+    }
+
+    .memories-title {
+      margin: 0 0 13px;
+      color: var(--rose-dark);
+      font-family: var(--serif);
+      font-size: 1.18rem;
+      font-style: italic;
+    }
+
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 9px;
+    }
+
+    .photo-grid figure {
+      overflow: hidden;
+      aspect-ratio: 1;
+      margin: 0;
+      border: 1px solid rgba(182, 95, 112, .14);
+      border-radius: 4px;
+      background: #efdfd7;
+    }
+
+    .photo-grid img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 350ms ease;
+    }
+
+    .photo-grid figure:hover img { transform: scale(1.055); }
+
     .letter {
       max-width: 580px;
       margin: 34px auto 0;
@@ -262,6 +300,8 @@
       .eyebrow { margin-bottom: 20px; font-size: .6rem; }
       .letter { margin-top: 28px; padding-top: 22px; }
       .letter p { line-height: 1.8; }
+      .memories { margin-top: 28px; }
+      .photo-grid { gap: 7px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -291,6 +331,20 @@
         <span class="button-heart" aria-hidden="true">♥</span>
       </button>
       <p class="hint">Un pequeño recuerdo de nosotros</p>
+
+      <section class="memories" aria-labelledby="memories-title">
+        <h2 class="memories-title" id="memories-title">Nuestros momentos</h2>
+        <div class="photo-grid">
+          <figure><img src="assets/recuerdo-01.jpeg" alt="Un retrato al aire libre entre las montañas" loading="lazy" decoding="async"></figure>
+          <figure><img src="assets/recuerdo-02.jpeg" alt="Un momento especial con un ramo de rosas" loading="lazy" decoding="async"></figure>
+          <figure><img src="assets/recuerdo-03.jpeg" alt="Un retrato sonriente" loading="lazy" decoding="async"></figure>
+          <figure><img src="assets/recuerdo-04.jpeg" alt="Un recuerdo juntos" loading="lazy" decoding="async"></figure>
+          <figure><img src="assets/recuerdo-05.jpeg" alt="Un paseo juntos" loading="lazy" decoding="async"></figure>
+          <figure><img src="assets/recuerdo-06.jpeg" alt="Un selfie juntos en un lugar colorido" loading="lazy" decoding="async"></figure>
+          <figure><img src="assets/recuerdo-07.jpeg" alt="Una mirada cómplice" loading="lazy" decoding="async"></figure>
+          <figure><img src="assets/recuerdo-08.jpeg" alt="Un momento cariñoso juntos" loading="lazy" decoding="async"></figure>
+        </div>
+      </section>
 
       <article class="letter" id="letter" hidden>
         <p>Hoy no es un día cualquiera. Hoy cumplimos 16 meses de caminar juntos, y aunque para algunos pueda sonar como un simple número, para mí es la prueba viva de que lo nuestro es real, es fuerte y es para siempre.</p>
